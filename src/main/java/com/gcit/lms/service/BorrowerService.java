@@ -393,7 +393,7 @@ public class BorrowerService {
 			}
 		}
 		
-		public void formBookLoan(BookCopy book, LibBranch branch, Borrower borrower) {
+		public void formBookLoan(BookCopy book, LibBranch branch, Borrower borrower) throws SQLException {
 			Date dateOut = new Date(new java.util.Date().getTime());
 			Date dueDate = new Date(new java.util.Date().getTime()+(7*24*60*60*1000));
 			Connection conn = null;
@@ -408,20 +408,27 @@ public class BorrowerService {
 				conn.commit();
 				System.out.println("CheckOut successful");
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				conn.rollback();
 				e.printStackTrace();
+				
 			} catch (SQLException e) {
 				System.out.println("Something went wrong, try again...");
 				e.printStackTrace();
+			}finally{
+				if(conn!=null){
+					conn.close();
+				}
 			}
 		}
 		
-			public void formCheckIn(BookLoan loan) {
+			public void formCheckIn(BookLoan loan) throws SQLException {
 			Date dateIn = new Date(new java.util.Date().getTime());
 			Connection conn = null;
 			BookCopy copy = null;
 			try {
 				conn = connUtil.getConnection();
 				BookLoanDAO adao = new BookLoanDAO(conn);
+				loan.setDateIn(dateIn);
 				adao.editBookLoanDate(loan);
 				copy =getBookCopyById(loan.getBook().getBookId(), loan.getBranch().getBranchId());
 				copy.setCopieNumbersInBranch(copy.getCopieNumbersInBranch()+1);
@@ -433,6 +440,11 @@ public class BorrowerService {
 				e.printStackTrace();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 				e.printStackTrace();
+				conn.rollback();
+			}finally{
+				if(conn!=null){
+					conn.close();
+				}
 			}
 		}
 		

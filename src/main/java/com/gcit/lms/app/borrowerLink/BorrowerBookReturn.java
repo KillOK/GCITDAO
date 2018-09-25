@@ -1,6 +1,5 @@
 package com.gcit.lms.app.borrowerLink;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,14 +86,13 @@ public class BorrowerBookReturn {
 	
 	
 	public void chooseTheBookCopieMenu(LibBranch branch){
+		System.out.println(loanMenuOptions);
 		try {
 			borrowersBookLoans = new ArrayList<>();
 			service.getBookLoanListByBorrower(borrower).stream().filter(p -> p.getBranch().getBranchId()==branch.getBranchId()).filter(p -> p.getDateIn()==null).forEach(borrowersBookLoans::add);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(borrowersBookLoans);
 		for(int i=0;i<borrowersBookLoans.size();i++) {
 			System.out.println((i+1)+") "+borrowersBookLoans.get(i).getBook().getTitle()+" "+borrowersBookLoans.get(i).getBook().getAuthors());
 		}
@@ -104,36 +102,28 @@ public class BorrowerBookReturn {
 	
 	public void chooseTheBookLoan(LibBranch branch) {
 		chooseTheBookCopieMenu(branch);
-		while(sc.hasNext()) {
+		while(true) {
 				int i = getIntFromInput();
 				if(i>borrowersBookLoans.size()+1||i<1) {
-					System.out.println("Enter Correct Book Number");
+					System.out.println("Enter Correct Book ID");
 					chooseTheBookLoan(branch);
 					break;
 				}else if(i==borrowersBookLoans.size()+1){
 					break;
 				} else {
 					formLoanPapers(borrowersBookLoans.get(i-1));
-					chooseTheBookLoan(branch);
+//					chooseTheBookLoan(branch);
 					break;
 				}
 			}
 	}
 	
 	public void formLoanPapers(BookLoan loan) {
-		Date dateIn = new Date(new java.util.Date().getTime());
-		service.formCheckIn(loan);
-//		try {
-//			loan.setDateIn(dateIn);
-//			service.editBookLoan(loan);;
-//			BookCopy book = service.getBookCopyById(loan.getBook().getBookId(), loan.getBranch().getBranchId());
-//			book.setCopieNumbersInBranch(book.getCopieNumbersInBranch()+1);
-//			service.editBookCopy(book);
-//			System.out.println("CheckOut successful");
-//		} catch (SQLException e) {
-//			System.out.println("Something went wrong, try again...");
-//			e.printStackTrace();
-//		}
+		try {
+			service.formCheckIn(loan);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

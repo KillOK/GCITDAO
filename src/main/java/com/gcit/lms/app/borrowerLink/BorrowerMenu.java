@@ -51,6 +51,7 @@ public class BorrowerMenu {
 			}else if(sc.hasNext()){
 				sc.next();
 				getMenu();
+				break;
 			}
 			break;
 		}

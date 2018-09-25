@@ -1,16 +1,17 @@
 package com.gcit.lms.app.borrowerLink;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.gcit.lms.entity.BookCopy;
-import com.gcit.lms.entity.BookLoan;
 import com.gcit.lms.entity.Borrower;
 import com.gcit.lms.entity.LibBranch;
 import com.gcit.lms.service.BorrowerService;
+
+import static  com.gcit.lms.app.util.UsefullMethods.getLineFromInput;
+import static  com.gcit.lms.app.util.UsefullMethods.getIntFromInput;
 
 public class BorrowerCheckOut {
 	Scanner sc=null;
@@ -124,7 +125,11 @@ public class BorrowerCheckOut {
 	}
 	
 	public void formLoanPapers(BookCopy book, LibBranch branch) {
-		service.formBookLoan(book,branch,borrower);
+		try {
+			service.formBookLoan(book,branch,borrower);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.gcit.lms.app.administratorlink.update;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +155,7 @@ public class UPDATEOperation {
 				e.printStackTrace();
 			}
 			break;
-	/////////////////////////////////////////Stopped here///////////////////////////////////////////////////////
+	
 		case 6:
 			try {
 				j=0;
@@ -176,19 +177,23 @@ public class UPDATEOperation {
 			}
 			break;
 		case 7:
+			BookLoan bookLoan = null;
 			List<BookLoan> loanList= new ArrayList<>();
-			System.out.println("1) To override due date press 1/n2) Go to main menu");
+			System.out.println("1) To override due date press 1\n2) Go to main menu");
 			j=getIntFromInput();
 			if(j==1) {
 				try {
+					loanList=service.getBookLoanList();
 					j=0;
 					for(BookLoan loan:loanList) {
 						j++;
 						System.out.println(j+") BookID: "+loan.getBook().getBookId()+" BorrowerID: "+loan.getBorrower().getCardNo()+" Borrower Name: "+loan.getBorrower().getName()+" Library Branch: id "+loan.getBranch().getBranchId()+" "+loan.getBranch().getBranchName()+" Due Date: "+loan.getDueDate());                                      
 					}
 					System.out.println("Enter number of loan, which you want to override");
-//					service.overrideLoan(loanList.get(getIntFromInput()-1));
-				} catch (/*SQLException |*/ NullPointerException e) {
+					bookLoan = loanList.get(getIntFromInput()-1);
+					bookLoan.setDueDate(new Date(new java.util.Date().getTime()+(7*24*60*60*1000)));
+					service.editBookLoan(bookLoan);
+				} catch (SQLException | NullPointerException e) {
 					e.printStackTrace();
 				}
 			}else {				

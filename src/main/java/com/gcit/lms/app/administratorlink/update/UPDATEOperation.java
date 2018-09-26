@@ -33,7 +33,11 @@ public class UPDATEOperation {
 	public void start() {
 		primaryMenu();
 	}
-	
+	/**
+	 * To insert new Book- Author connection should create new method fill list, then book.setAuthors(our new list<Authors>)
+	 * Then {@link LibBranch com.gcit.lms.service.AdminService.editBook(Book)} will implement {@link com.gcit.lms.dao.BookDAO.#updateBookRelations(Book)}will update all this in DB            
+	 * @see com.gcit.lms.service.AdminService.#editBook(Book)
+	 */
 	void primaryMenu(){
 		System.out.println("Select Table to update data");
 		

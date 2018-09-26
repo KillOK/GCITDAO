@@ -75,8 +75,6 @@ public class AdminService {
 			BookDAO bdao = new BookDAO(conn);
 			int i =bdao.addBookWithID(book);
 			book.setBookId(i);
-			System.out.println(book);
-			System.out.println(bdao.getBookById(i));
 			bdao.updateBookRelations(book);
 			conn.commit();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {

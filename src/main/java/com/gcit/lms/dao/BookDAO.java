@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +36,14 @@ public class BookDAO extends BaseDAO<Book> {
 	}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Only insert new relarions into the table, to delete use {@link #deleteAuthor(Author author, Book book)}
+	 * @param book
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void updateBookRelations(Book book) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		updateAuthorBookRelations(book);
 		updateGenreBookRelations(book);

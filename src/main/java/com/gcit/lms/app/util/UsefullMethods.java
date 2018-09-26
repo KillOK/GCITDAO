@@ -28,6 +28,8 @@ public class UsefullMethods {
 				break;
 			}else {
 				System.out.println("You should enter numeric value...");
+				sc.nextLine();
+				break;
 			}
 		}
 		return s;

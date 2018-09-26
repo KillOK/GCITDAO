@@ -41,7 +41,7 @@ public class CREATEOperation {
 			System.out.println((i+1)+") "+classes.values()[i]);
 		}
 		
-		int i = sc.nextInt();
+		int i = getIntFromInput();
 		System.out.println("\n*************************************************************************************************************");
 		switch (i) {
 		case 1:

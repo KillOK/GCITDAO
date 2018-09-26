@@ -82,11 +82,11 @@ public class CREATEOperation {
 		case 4:
 				List<Book> publisherbooklist = new ArrayList();
 				Publisher publisher = new Publisher();
-				System.out.println("Enter new Publisher name\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Publisher name");
 				publisher.setPubName(getLineFromInput());
-				System.out.println("Enter new Publisher address\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Publisher address");
 				publisher.setPubAddress(getLineFromInput());
-				System.out.println("Enter new Publisher phone\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Publisher phone");
 				publisher.setPubPhone(getLineFromInput());
 				try {
 					service.addPublisher(publisher);
@@ -99,9 +99,9 @@ public class CREATEOperation {
 				LibBranch libBranch = new LibBranch();
 				List<BookCopy> bookcopielist = new ArrayList();
 				List<BookLoan> loans = new ArrayList();
-				System.out.println("Enter new Brunch name\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Brunch name");
 				libBranch.setBranchName(getLineFromInput());
-				System.out.println("Enter new Brunch address\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Brunch address");
 				libBranch.setBranchAdress(getLineFromInput());
 				try {
 					service.addLibBranch(libBranch);
@@ -112,11 +112,11 @@ public class CREATEOperation {
 		case 6:
 				List<BookLoan> borrowerloanlist = new ArrayList();
 				Borrower borrower = new Borrower();
-				System.out.println("Enter new Borrower name\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Borrower name");
 				borrower.setName(getLineFromInput());
-				System.out.println("Enter new Borrower address\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Borrower address");
 				borrower.setAdress(getLineFromInput());
-				System.out.println("Enter new Borrower phone\nPrint N/A if you dont want to enter the field");
+				System.out.println("Enter new Borrower phone");
 				borrower.setPhone(getLineFromInput());
 				try {
 					service.addBorrower(borrower);

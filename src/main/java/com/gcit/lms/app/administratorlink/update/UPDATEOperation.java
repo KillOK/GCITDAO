@@ -43,7 +43,9 @@ public class UPDATEOperation {
 		
 		int i = getIntFromInput();
 		System.out.println("\n*************************************************************************************************************");
+		///////////////There also should be branches to populate and set Lists/////////////////////////////////
 		int j = 0 ;
+		String buffer="";
 		switch (i) {
 		case 1:
 				List<Book> bookList = new ArrayList<>();
@@ -118,11 +120,14 @@ public class UPDATEOperation {
 					System.out.println("Enter id of publisher, which data you want to edit");
 					publisher = service.getPublisherById(getIntFromInput());
 					System.out.println("Enter new Publisher name\nPrint N/A if you dont want to enter the field");
-					publisher.setPubName(getLineFromInput());
+					buffer=getLineFromInput();
+					if(!buffer.toUpperCase().equals("N/A"))publisher.setPubName(buffer);
 					System.out.println("Enter new Publisher address\nPrint N/A if you dont want to enter the field");
-					publisher.setPubAddress(getLineFromInput());
+					buffer=getLineFromInput();
+					if(!buffer.toUpperCase().equals("N/A"))publisher.setPubAddress(buffer);
 					System.out.println("Enter new Publisher phone\nPrint N/A if you dont want to enter the field");
-					publisher.setPubPhone(getLineFromInput());
+					buffer=getLineFromInput();
+					if(!buffer.toUpperCase().equals("N/A"))publisher.setPubPhone(buffer);
 					System.out.println(publisher);
 					service.editPublisher(publisher);
 				} catch (SQLException | NullPointerException e) {
@@ -146,10 +151,10 @@ public class UPDATEOperation {
 			libBranch = service.getLibBranchById(getIntFromInput());
 			System.out.println("Enter new Brunch name\nPrint N/A if you dont want to enter the field");
 			brunchName = getLineFromInput();
-			libBranch.setBranchName(brunchName);
+			if(!brunchName.toUpperCase().equals("N/A"))libBranch.setBranchName(brunchName);
 			System.out.println("Enter new Brunch address\nPrint N/A if you dont want to enter the field");
-			brunchAddress = getLineFromInput();
-			libBranch.setBranchAdress(brunchAddress);
+			brunchName = getLineFromInput();
+			if(!brunchName.toUpperCase().equals("N/A"))libBranch.setBranchAdress(brunchAddress);
 				service.editLibBranch(libBranch);
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
@@ -166,11 +171,14 @@ public class UPDATEOperation {
 				System.out.println("Enter card Number of borrower, which datd you want to update: \n");
 				Borrower borrower = service.getBorrowerById(getIntFromInput());
 				System.out.println("Enter new Borrower name\nPrint N/A if you dont want to enter the field");
-				borrower.setName(getLineFromInput());
+				buffer=getLineFromInput();
+				if(!buffer.toUpperCase().equals("N/A"))borrower.setName(buffer);
 				System.out.println("Enter new Borrower address\nPrint N/A if you dont want to enter the field");
-				borrower.setAdress(getLineFromInput());
+				buffer=getLineFromInput();
+				if(!buffer.toUpperCase().equals("N/A"))borrower.setAdress(buffer);
 				System.out.println("Enter new Borrower phone\nPrint N/A if you dont want to enter the field");
-				borrower.setPhone(getLineFromInput());
+				buffer=getLineFromInput();
+				if(!buffer.toUpperCase().equals("N/A"))borrower.setPhone(buffer);
 				service.editBorrower(borrower);
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
